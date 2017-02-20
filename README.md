@@ -26,7 +26,14 @@ Docker Compose is used to start three containers and execute the tests; those co
 * `crdriver`: the standalone Selenium Chrome node used by the tests
 * `ffdriver`: the standalone Selenium Firefox node used by the tests
 
-**Important:** Before running the examples you will need to build up some container images.
+**Important:** Before running the examples you will need to build up some container images. See [images/README.md](images/README.md).
+
+## Getting started
+
+See the README files in the example directories:
+
+* [helloworld/README.md](helloworld/README.md)
+* [helloworld-tls/README.md](helloworld-tls/README.md)
 
 ## Container images
 

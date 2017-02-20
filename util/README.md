@@ -1,12 +1,12 @@
 # Utility scripts
 
-These are scripts that provide functions and utilities common to both examples.
+These are scripts that provide functions and utilities common to both examples. They are called from scripts found in the example directories.
 
-* `capture-dv-container.sh`: asdf
-* `create-dv-container.sh`: asdf
-* `dv-sync.src`: asdf
-* `update-cert-dv.sh`: asdf
-* `update-root-ca-dv.sh:` asdf
+* `capture-dv-container.sh`: If you change code in the tester container, you can copy those changes back to your Docker Machine desktop using this script.
+* `create-dv-container.sh`: Creates or updates a data volume container.
+* `dv-sync.src`: Bash functions shared by many of these scripts.
+* `update-cert-dv.sh`: Update the server certificate data volume container with the server certificate.
+* `update-root-ca-dv.sh:` Update a root CA data volume container with a root CA certificate. Not actually used by either `helloworld` or `helloworld-tls` examples&mdash;I think :-).
 
 --
 
