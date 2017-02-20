@@ -84,33 +84,33 @@ To run the example:
 You should see the successful execution of two tests cases (one using Chrome and one using Firefox). The output will be something like this:
 
 ```nohighlight
-[master]~/Documents/xmp/Selenium-and-TLS/helloworld$
+[master]~/Documents/xmp/Selenium-and-TLS/helloworld-tls$
 ./test-up-follow-down.sh
-Creating network "helloworld_app-test-net" with driver "bridge"
-Creating helloworld_crdriver_1
-Creating helloworld_ffdriver_1
-Creating helloworld_tester_1
+Creating network "helloworldtls_app-test-net" with driver "bridge"
+Creating helloworldtls_crdriver_1
+Creating helloworldtls_ffdriver_1
+Creating helloworldtls_tester_1
 test_admin_home_page (test_selenium_cr.ChromiumSeleniumTestCase) ... ok
 test_admin_home_page (test_selenium_ff.FirefoxSeleniumTestCase) ... ok
 
 ----------------------------------------------------------------------
-Ran 2 tests in 5.479s
+Ran 2 tests in 5.617s
 
 OK
-Stopping helloworld_ffdriver_1 ... done
-Stopping helloworld_crdriver_1 ... done
-Removing helloworld_tester_1 ... done
-Removing helloworld_ffdriver_1 ... done
-Removing helloworld_crdriver_1 ... done
-Removing network helloworld_app-test-net
+Stopping helloworldtls_ffdriver_1 ... done
+Stopping helloworldtls_crdriver_1 ... done
+Removing helloworldtls_tester_1 ... done
+Removing helloworldtls_ffdriver_1 ... done
+Removing helloworldtls_crdriver_1 ... done
+Removing network helloworldtls_app-test-net
 ```
 
-**Note:** If you want to see what the website looks like, you can execute `run-server.sh` and then point your browser to [http://tester.experiment.dev](http://tester.experiment.dev).
+**Note:** If you want to see what the website looks like, you can execute `run-server.sh` and then point your browser to [https://tester.experiment.dev](http://tester.experiment.dev). You'll need to launch Firefox using the profile you created above (so that the root CA cert can be used to validate the site certificate); for Chrome, you'll need to add the root CA cert to the system trusted store (e.g., see `selenium-standalonechrome-tls/Dockerfile` for how to update the Ubuntu system trusted store).
 
 ## Scripts
 
 * `push-src.sh`: Create or recreate the source data volume container.
-* `run-server.sh`: Just runs the website in a container with port 80 exposed. You can point a browser at this and see that the site is operating. This does not run any automated tests.
+* `run-server.sh`: Just runs the website in a container with port 443 exposed. You can point a browser at this and see that the site is operating. This does not run any automated tests.
 * `test-down.sh`: Tears down the containers and networks created by `test-up.sh`. You need to run this; `test-up.sh` does not automatically clean up after itself.
 * `test-up.sh`: Uses Docker Compose to launch Chrome and Firefox Selenium client nodes and the website test node. The test node executes tests that use the Selenium clients to interact with a web endpoint stood up by the test harness. _Use `docker logs` to see the test log and test results from the test container._ Run `push-src.sh` or `update-src.sh` before launching `test-up.sh` to be sure you test the latest source code.
 * `test-up-follow-down.sh`: Uses Docker Compose to launch Chrome and Firefox Selenium client nodes and the website test node, displays the test execution log to the console, and then teards down the containers and networks instantiated by Docker Compose. The test node executes tests that use the Selenium clients to interact with a web endpoint stood up by the test harness. Run `push-src.sh` or `update-src.sh` before launching `test-up.sh` to be sure you test the latest source code.
