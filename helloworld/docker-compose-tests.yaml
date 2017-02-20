@@ -1,0 +1,66 @@
+version: "2"
+
+services:
+
+  # probe:
+  #   command: [ "/bin/ash", "-c", "sleep 3600" ]
+  #   depends_on:
+  #     - tester
+  #   domainname: experiment.dev
+  #   hostname: probe
+  #   image: datihein/flask-0.11.1:1.0.0
+  #   networks:
+  #     app-test-net:
+  #       aliases:
+  #         - probe.experiment.dev
+
+  # web:
+  #   command: [ "/mnt/app/src/doit.sh" ]
+  #   depends_on:
+  #     - ffdriver
+  #     - crdriver
+  #   domainname: experiment.dev
+  #   hostname: web
+  #   image: datihein/flask-helloworld:1.0.0
+  #   networks:
+  #     app-test-net:
+  #       aliases:
+  #         - web.experiment.dev
+  #   networks:
+  #     app-test-net:
+  #       aliases:
+  #         - web.experiment.dev
+  #   volumes_from:
+  #     - container:dv-helloworld-src
+  #   working_dir: /mnt/app/src
+
+  tester:
+    command: [ "/mnt/app/src/testit.sh" ]
+    # command: [ "/bin/ash", "-c", "sleep 3600" ]
+    depends_on:
+      - ffdriver
+      - crdriver
+    domainname: experiment.dev
+    hostname: tester
+    image: datihein/flask-helloworld-test:1.0.0
+    networks:
+      app-test-net:
+        aliases:
+          - tester.experiment.dev
+    volumes_from:
+      - container:dv-helloworld-src
+    working_dir: /mnt/app/src
+
+  ffdriver:
+    image: datihein/selenium-standalonefirefox-3.0.1-ferrium:1.0.0
+    networks:
+      - app-test-net
+
+  crdriver:
+    image: datihein/selenium-standalonechrome-3.0.1-ferrium:1.0.0
+    networks:
+      - app-test-net
+
+networks:
+  app-test-net:
+    driver: bridge

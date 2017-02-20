@@ -1,0 +1,4 @@
+# Ignore the generated certs and keys
+#
+root_*/
+certs/
