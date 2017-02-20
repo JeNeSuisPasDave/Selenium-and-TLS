@@ -13,9 +13,31 @@ The application and test source code is provided by means of a data volume conta
 3. Establish the source code data volume container by executing `./push-src.sh`
 4. Run the example by executing `./test-up-follow-down.sh`.
 
-You should see the successful execution of two tests cases (one using Chrome and one using Firefox).
+You should see the successful execution of two tests cases (one using Chrome and one using Firefox). The output will be something like this:
 
-If you want to see what the website looks like, you can execute `run-server.sh` and then point your browser to `tester.experiment.dev`.
+```nohighlight
+[master]~/Documents/xmp/Selenium-and-TLS/helloworld$
+./test-up-follow-down.sh
+Creating network "helloworld_app-test-net" with driver "bridge"
+Creating helloworld_crdriver_1
+Creating helloworld_ffdriver_1
+Creating helloworld_tester_1
+test_admin_home_page (test_selenium_cr.ChromiumSeleniumTestCase) ... ok
+test_admin_home_page (test_selenium_ff.FirefoxSeleniumTestCase) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 5.479s
+
+OK
+Stopping helloworld_ffdriver_1 ... done
+Stopping helloworld_crdriver_1 ... done
+Removing helloworld_tester_1 ... done
+Removing helloworld_ffdriver_1 ... done
+Removing helloworld_crdriver_1 ... done
+Removing network helloworld_app-test-net
+```
+
+**Note:** If you want to see what the website looks like, you can execute `run-server.sh` and then point your browser to [http://tester.experiment.dev](http://tester.experiment.dev).
 
 ## Scripts
 
