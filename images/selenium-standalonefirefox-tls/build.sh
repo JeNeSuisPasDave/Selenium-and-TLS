@@ -10,8 +10,8 @@ function do_it() {
 
 CA_CERT_TGT_DIR_="delme/CA-certs"
 mkdir -p "${CA_CERT_TGT_DIR_}"
-CA_CERT_SRC_="${HOME}/.CA/root_ca_2016/rootCAcert.pem"
-CA_CERT_TGT_FILE_="root-ca-2016.crt"
+CA_CERT_SRC_="../../certs/root_ca_2017/rootCAcert.pem"
+CA_CERT_TGT_FILE_="root-ca-2017.crt"
 openssl x509 -outform pem \
   -in "${CA_CERT_SRC_}" \
   -out "${CA_CERT_TGT_DIR_}/${CA_CERT_TGT_FILE_}"

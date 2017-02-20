@@ -1,26 +1,34 @@
-# Copyright 2017 David Hein
-#
-# Licensed under the MIT License. If the LICENSE file is missing, you
-# can find the MIT license terms here: https://opensource.org/licenses/MIT
-
 import re
 import threading
 import time
 import unittest
 from selenium import webdriver
+from selenium.webdriver.firefox.firefox_profile import FirefoxProfile
+import os
+import shutil
 from app import create_app
 import sys, traceback
+import ssl
 
-class ChromiumSeleniumTestCase(unittest.TestCase):
+class FirefoxSeleniumTestCase(unittest.TestCase):
     client = None
 
     @classmethod
     def setUpClass(cls):
-        # start Chrome Selenium node
+        # start Firefox Selenium node
         try:
-            url = 'http://crdriver:4444/wd/hub'
-            capabilities = webdriver.DesiredCapabilities.CHROME.copy()
+            url = 'http://ffdriver:4444/wd/hub'
+            capabilities = webdriver.DesiredCapabilities.FIREFOX.copy()
+
+            home_directory = os.environ['HOME']
+            profile_directory = os.path.join(
+                home_directory, 'ff-profile-with-cert')
+            os.mkdir(profile_directory)
+            shutil.copy('firefox_trusted_certs/cert8.db', profile_directory)
+            profile = FirefoxProfile(profile_directory)
+
             cls.client = webdriver.Remote(
+                browser_profile=profile,
                 command_executor=url,
                 desired_capabilities=capabilities)
         except:
@@ -44,9 +52,16 @@ class ChromiumSeleniumTestCase(unittest.TestCase):
 
             # start the Flask server in a thread
             # print("\n*** STARTING SERVER ***\n")
+            ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+            ssl_context.load_cert_chain(
+                '/mnt/experiment/tls/cert.pem',
+                keyfile='/mnt/experiment/tls/certkey.pem')
             threading.Thread(
                 target=cls.app.run,
-                kwargs={'host':'0.0.0.0', 'port':'80'}).start()
+                kwargs={
+                    'ssl_context':ssl_context,
+                    'host':'0.0.0.0',
+                    'port':'443'}).start()
 
             # give the server a second to ensure it is up
             time.sleep(1)
@@ -55,7 +70,7 @@ class ChromiumSeleniumTestCase(unittest.TestCase):
     def tearDownClass(cls):
         if cls.client:
             # stop the flask server and the browser
-            cls.client.get('http://tester.experiment.dev/shutdown')
+            cls.client.get('https://tester.experiment.dev/shutdown')
             cls.client.close()
 
             # remove application context
@@ -64,6 +79,9 @@ class ChromiumSeleniumTestCase(unittest.TestCase):
     def setUp(self):
         if not self.client:
             self.skipTest('Web browser not available')
+        home_directory = os.environ['HOME']
+        profile_directory = os.path.join(
+            home_directory, 'ff-profile-with-cert')
 
     def tearDown(self):
         pass
@@ -71,7 +89,7 @@ class ChromiumSeleniumTestCase(unittest.TestCase):
     def test_admin_home_page(self):
         # navigate to home page
         #
-        self.client.get('http://tester.experiment.dev/')
+        self.client.get('https://tester.experiment.dev/')
 
         # Does the page contain the text we expect?
         #

@@ -17,8 +17,6 @@ MNT_SRC_="/mnt/app/src"
 # Locate the container data volume creation script
 #
 UTIL_DIR_=$( dirname "${PWD}" )
-UTIL_DIR_=$( dirname "${UTIL_DIR_}" )
-UTIL_DIR_=$( dirname "${UTIL_DIR_}" )
 UTIL_DIR_="${UTIL_DIR_}/util"
 if [ ! -f "${UTIL_DIR_}/create-dv-container.sh" ]; then
   MSG_="ERROR: could not locate 'create-dv-container.sh'"

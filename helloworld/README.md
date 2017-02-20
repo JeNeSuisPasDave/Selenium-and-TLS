@@ -4,7 +4,7 @@ This experiment demonstrates using Selenium client containers to test browser in
 
 The application and test source code is provided by means of a data volume container.
 
-# Quick start
+## Quick start
 
 **Precondition:** you have built up all the images (except those needed only for `helloworld-tls` example) as described in the [../images/README.md](../images/README.md) file.
 
@@ -42,7 +42,6 @@ Removing network helloworld_app-test-net
 ## Scripts
 
 * `push-src.sh`: Create or recreate the source data volume container.
-* `rm-src.sh`: Destory the source data volume container. Does not change the local `src` directory.
 * `run-server.sh`: Just runs the website in a container with port 80 exposed. You can point a browser at this and see that the site is operating. This does not run any automated tests.
 * `test-down.sh`: Tears down the containers and networks created by `test-up.sh`. You need to run this; `test-up.sh` does not automatically clean up after itself.
 * `test-up.sh`: Uses Docker Compose to launch Chrome and Firefox Selenium client nodes and the website test node. The test node executes tests that use the Selenium clients to interact with a web endpoint stood up by the test harness. _Use `docker logs` to see the test log and test results from the test container._ Run `push-src.sh` or `update-src.sh` before launching `test-up.sh` to be sure you test the latest source code.

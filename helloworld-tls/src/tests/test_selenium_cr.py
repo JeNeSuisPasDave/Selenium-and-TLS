@@ -1,8 +1,3 @@
-# Copyright 2017 David Hein
-#
-# Licensed under the MIT License. If the LICENSE file is missing, you
-# can find the MIT license terms here: https://opensource.org/licenses/MIT
-
 import re
 import threading
 import time
@@ -10,6 +5,7 @@ import unittest
 from selenium import webdriver
 from app import create_app
 import sys, traceback
+import ssl
 
 class ChromiumSeleniumTestCase(unittest.TestCase):
     client = None
@@ -44,9 +40,16 @@ class ChromiumSeleniumTestCase(unittest.TestCase):
 
             # start the Flask server in a thread
             # print("\n*** STARTING SERVER ***\n")
+            ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+            ssl_context.load_cert_chain(
+                '/mnt/experiment/tls/cert.pem',
+                keyfile='/mnt/experiment/tls/certkey.pem')
             threading.Thread(
                 target=cls.app.run,
-                kwargs={'host':'0.0.0.0', 'port':'80'}).start()
+                kwargs={
+                    'ssl_context':ssl_context,
+                    'host':'0.0.0.0',
+                    'port':'443'}).start()
 
             # give the server a second to ensure it is up
             time.sleep(1)
@@ -55,7 +58,7 @@ class ChromiumSeleniumTestCase(unittest.TestCase):
     def tearDownClass(cls):
         if cls.client:
             # stop the flask server and the browser
-            cls.client.get('http://tester.experiment.dev/shutdown')
+            cls.client.get('https://tester.experiment.dev/shutdown')
             cls.client.close()
 
             # remove application context
@@ -71,7 +74,7 @@ class ChromiumSeleniumTestCase(unittest.TestCase):
     def test_admin_home_page(self):
         # navigate to home page
         #
-        self.client.get('http://tester.experiment.dev/')
+        self.client.get('https://tester.experiment.dev/')
 
         # Does the page contain the text we expect?
         #

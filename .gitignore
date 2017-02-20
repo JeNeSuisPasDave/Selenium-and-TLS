@@ -15,6 +15,6 @@
 *.bz2
 *.xz
 
-# data files
+# data files (such as cert8.db)
 #
 *.db

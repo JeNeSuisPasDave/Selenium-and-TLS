@@ -6,12 +6,12 @@
 # Licensed under the MIT License. If the LICENSE file is missing, you
 # can find the MIT license terms here: https://opensource.org/licenses/MIT
 
-# Update the 'dv-helloworld-src' with the latest application source code
+# Update the 'dv-helloworldtls-src' with the latest application source code
 #
 
 # Specify the container name and mount point
 #
-DV_SRC_="dv-helloworld-src"
+DV_SRC_="dv-helloworldtls-src"
 MNT_SRC_="/mnt/app/src"
 
 # Locate the container data volume creation script

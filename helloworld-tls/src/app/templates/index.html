@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}HelloWorld{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+  <h1>Hello, Stranger!</h1>
+</div>
+<div class="page-body">
+  <p>This is just a test.</p>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{% endblock %}

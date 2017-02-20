@@ -15,16 +15,17 @@ services:
         aliases:
           - tester.experiment.dev
     volumes_from:
-      - container:dv-helloworld-src
+      - container:dv-helloworldtls-src
+      - container:dv-cert-tester-experiment-dev
     working_dir: /mnt/app/src
 
   ffdriver:
-    image: datihein/selenium-standalonefirefox-3.0.1-ferrium:1.0.0
+    image: datihein/selenium-standalonefirefox-3.0.1-ferrium-tls:1.0.0
     networks:
       - app-test-net
 
   crdriver:
-    image: datihein/selenium-standalonechrome-3.0.1-ferrium:1.0.0
+    image: datihein/selenium-standalonechrome-3.0.1-ferrium-tls:1.0.0
     networks:
       - app-test-net
 
