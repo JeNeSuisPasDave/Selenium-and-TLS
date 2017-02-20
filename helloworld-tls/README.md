@@ -6,7 +6,7 @@ The application and test source code is provided by means of a data volume conta
 
 ## Create the certificates
 
-Follow the guideance in [../certs/README.md](../certs/README.md) to create the root CA certificate and server certificate that will be used in this example.
+Follow the guidance in [../certs/README.md](../certs/README.md) to create the root CA certificate and server certificate that will be used in this example.
 
 ## Add the root CA certificate to the system trusted store of Selenium images
 
@@ -62,7 +62,7 @@ With a populated `cert8.db` in that location, push the source tree to the data v
 
 ## Prep for Chrome Selenium client
 
-Chrome uses the system's trusted root certificate store, so you'll need to have added the trusted root certifiate that signed the server's DV certificate in that store.
+Chrome uses the system's trusted root certificate store, so you'll need to have added the trusted root certificate that signed the server's DV certificate in that store.
 
 In this example, that was done when building the docker images used for the Selenium client nodes (specifically via `selenium-standalonechrome-tls`).
 
@@ -113,13 +113,13 @@ Removing network helloworldtls_app-test-net
 * `run-server.sh`: Just runs the website in a container with port 443 exposed. You can point a browser at this and see that the site is operating. This does not run any automated tests.
 * `test-down.sh`: Tears down the containers and networks created by `test-up.sh`. You need to run this; `test-up.sh` does not automatically clean up after itself.
 * `test-up.sh`: Uses Docker Compose to launch Chrome and Firefox Selenium client nodes and the website test node. The test node executes tests that use the Selenium clients to interact with a web endpoint stood up by the test harness. _Use `docker logs` to see the test log and test results from the test container._ Run `push-src.sh` or `update-src.sh` before launching `test-up.sh` to be sure you test the latest source code.
-* `test-up-follow-down.sh`: Uses Docker Compose to launch Chrome and Firefox Selenium client nodes and the website test node, displays the test execution log to the console, and then teards down the containers and networks instantiated by Docker Compose. The test node executes tests that use the Selenium clients to interact with a web endpoint stood up by the test harness. Run `push-src.sh` or `update-src.sh` before launching `test-up.sh` to be sure you test the latest source code.
+* `test-up-follow-down.sh`: Uses Docker Compose to launch Chrome and Firefox Selenium client nodes and the website test node, displays the test execution log to the console, and then tears down the containers and networks instantiated by Docker Compose. The test node executes tests that use the Selenium clients to interact with a web endpoint stood up by the test harness. Run `push-src.sh` or `update-src.sh` before launching `test-up.sh` to be sure you test the latest source code.
 * `update-cert-dv.sh`: Create or update the server certificate data volume container.
 * `update-src.sh`: Update the source data volume container to match what is in the `src` directory. Do this if you change the code.
 
 ## Image naming
 
-All the image names are prefixed with `datihein/`. That's what I use for namespacing all my private experimental images, those I use for experiments or testing and never intend to push into a repositoriy. If you want to use a different prefix, go ahead ... but you'll need to do a global replace because there are many scripts and Dockerfiles that specify image names with that prefix.
+All the image names are prefixed with `datihein/`. That's what I use for namespacing all my private experimental images, those I use for experiments or testing and never intend to push into a repository. If you want to use a different prefix, go ahead ... but you'll need to do a global replace because there are many scripts and Dockerfiles that specify image names with that prefix.
 
 ## Credit
 

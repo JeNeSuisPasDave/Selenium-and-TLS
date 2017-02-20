@@ -43,7 +43,7 @@ For details on building the necessary container images, see [images/README.md](i
 
 ## Certificates
 
-To exercise the `helloworld-tls` example, you'll need to create a root CA cert and a domain validation cerficate (a server certificate) signed by that CA cert.
+To exercise the `helloworld-tls` example, you'll need to create a root CA cert and a domain validation certificate (a server certificate) signed by that CA cert.
 
 ## Credit
 

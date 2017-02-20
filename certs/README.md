@@ -24,7 +24,7 @@ The process of using OpenSSL to generate a _root CA_ certificate for use on inte
 
 ### Update the config file
 
-Edit the `ca_2017_openssl.cnf` file. If the current year isn't 2017, then change the file name as well. You'll probably want to change these lines (listed in order, but they are not continguous):
+Edit the `ca_2017_openssl.cnf` file. If the current year isn't 2017, then change the file name as well. You'll probably want to change these lines (listed in order, but they are not contiguous):
 
 * dir = ./root_ca_2017        # Where everything is kept
 * countryName_default = US

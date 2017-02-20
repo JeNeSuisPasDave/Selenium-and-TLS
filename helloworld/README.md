@@ -45,12 +45,12 @@ Removing network helloworld_app-test-net
 * `run-server.sh`: Just runs the website in a container with port 80 exposed. You can point a browser at this and see that the site is operating. This does not run any automated tests.
 * `test-down.sh`: Tears down the containers and networks created by `test-up.sh`. You need to run this; `test-up.sh` does not automatically clean up after itself.
 * `test-up.sh`: Uses Docker Compose to launch Chrome and Firefox Selenium client nodes and the website test node. The test node executes tests that use the Selenium clients to interact with a web endpoint stood up by the test harness. _Use `docker logs` to see the test log and test results from the test container._ Run `push-src.sh` or `update-src.sh` before launching `test-up.sh` to be sure you test the latest source code.
-* `test-up-follow-down.sh`: Uses Docker Compose to launch Chrome and Firefox Selenium client nodes and the website test node, displays the test execution log to the console, and then teards down the containers and networks instantiated by Docker Compose. The test node executes tests that use the Selenium clients to interact with a web endpoint stood up by the test harness. Run `push-src.sh` or `update-src.sh` before launching `test-up.sh` to be sure you test the latest source code.
+* `test-up-follow-down.sh`: Uses Docker Compose to launch Chrome and Firefox Selenium client nodes and the website test node, displays the test execution log to the console, and then tears down the containers and networks instantiated by Docker Compose. The test node executes tests that use the Selenium clients to interact with a web endpoint stood up by the test harness. Run `push-src.sh` or `update-src.sh` before launching `test-up.sh` to be sure you test the latest source code.
 * `update-src.sh`: Update the source data volume container to match what is in the `src` directory. Do this if you change the code.
 
 ## Image naming
 
-All the image names are prefixed with `datihein/`. That's what I use for namespacing all my private experimental images, those I use for experiments or testing and never intend to push into a repositoriy. If you want to use a different prefix, go ahead ... but you'll need to do a global replace because there are many scripts and Dockerfiles that specify image names with that prefix.
+All the image names are prefixed with `datihein/`. That's what I use for namespacing all my private experimental images, those I use for experiments or testing and never intend to push into a repository. If you want to use a different prefix, go ahead ... but you'll need to do a global replace because there are many scripts and Dockerfiles that specify image names with that prefix.
 
 ## Credit
 
